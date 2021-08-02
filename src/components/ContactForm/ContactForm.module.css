@@ -1,0 +1,17 @@
+.phonebookInputFields {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4%;
+  margin-top: 40px;
+}
+
+.phonebookInputFields,
+.phonebookInput,
+.filterInput {
+  margin: 10px 0;
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  color: blue;
+  width: 100%;
+}
