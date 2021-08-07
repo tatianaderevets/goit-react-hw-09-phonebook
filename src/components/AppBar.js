@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Navigation from './Navigation';
 import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
@@ -17,7 +17,16 @@ const styles = {
 }
 }
 
-const MenuBar = ({ isAuthenticated }) => (
+// const mapStateToProps = state => ({
+//     isAuthenticated: authSelectors.getIsAuthenticated(state),
+// });
+
+// export default connect(mapStateToProps)(MenuBar);
+
+export default function MenuBar() {
+    const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
+
+    return (
     
     <header>
         <CssBaseline />
@@ -26,14 +35,11 @@ const MenuBar = ({ isAuthenticated }) => (
         
         {/* style={styles.header} */}
         <Navigation />
-            {isAuthenticated ? <UserMenu /> : <AuthNav />}
+            {isLoggedIn ? <UserMenu /> : <AuthNav />}
             </Toolbar>
          </AppBar>
     </header>
 );
+}
 
-const mapStateToProps = state => ({
-    isAuthenticated: authSelectors.getIsAuthenticated(state),
-});
 
-export default connect(mapStateToProps)(MenuBar);

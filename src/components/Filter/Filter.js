@@ -1,13 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import s from './Filter.module.css';
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import { contactsSelectors, changeFilter } from "../../redux/contacts";
 
 import { Container, Input, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-const Filter = ({ value, onChange }) => (
+// const mapStateToProps = (state) => ({
+// value: contactsSelectors.getFilter(state),
+// })
+
+// const mapDispatchToProps = dispatch => ({
+//     onChange: (e) => dispatch(changeFilter(e.target.value)),
+// });
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+export default function Filter() {
+  const dispatch = useDispatch();
+  const value = useSelector(contactsSelectors.getFilter);
+  const onChange = (e) => dispatch(changeFilter(e.target.value));
+
+  return (
     <Container maxWidth="sm">
         <div>
     <label>
@@ -27,20 +43,10 @@ const Filter = ({ value, onChange }) => (
             </div>
     </Container>
 );
-
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-value: contactsSelectors.getFilter(state),
-})
+// Filter.propTypes = {
+//   value: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// }
 
-const mapDispatchToProps = dispatch => ({
-    onChange: (e) => dispatch(changeFilter(e.target.value)),
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);

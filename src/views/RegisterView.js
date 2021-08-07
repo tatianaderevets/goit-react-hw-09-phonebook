@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 import {
   CssBaseline,
@@ -9,28 +9,53 @@ import {
   Typography,
 } from '@material-ui/core';
 
+// const mapDispatchToProps = {
+//     onRegister: authOperations.register,
+// };
 
-class RegisterView extends Component {
-    state = {
-        name: '',
-        email: '',
-        password: '',
-    };
+// export default connect(null, mapDispatchToProps)(RegisterView);
 
-    handleChange = ({ target: { name, value } }) => {
-        this.setState({ [name]: value });
-    };
 
-    handleSubmit = e => {
+
+export default function RegisterView() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+    // state = {
+    //     name: '',
+    //     email: '',
+    //     password: '',
+    // };
+
+    const handleChange = e => {
+    const { name, value } = e.currentTarget;
+
+    switch (name) {
+      case 'name':
+        return setName(value);
+      case 'email':
+        return setEmail(value);
+      case 'password':
+        return setPassword(value);
+
+      default:
+    }
+  };
+
+    const handleSubmit = e => {
         e.preventDefault();
 
-        this.props.onRegister(this.state);
+         dispatch(authOperations.register({ name, email, password }));
 
-        this.setState({ name: '', email: '', password: '' });
+    setName('');
+    setEmail('');
+    setPassword('');
     };
 
-    render() {
-        const { name, email, password } = this.state;
+   
+        // const { name, email, password } = this.state;
 
         return (
             <Container maxWidth="sm">
@@ -43,13 +68,13 @@ class RegisterView extends Component {
         >
           Please, add your Profile!
         </Typography>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <TextField
             type="text"
             name="name"
             value={name}
             required
-            onChange={this.handleChange}
+            onChange={handleChange}
             id="standard-basic"
             label="name"
             style={{ marginRight: '20px' }}
@@ -60,7 +85,7 @@ class RegisterView extends Component {
             name="email"
             value={email}
             required
-            onChange={this.handleChange}
+            onChange={handleChange}
             id="standard-basic"
             label="e-mail"
             style={{ marginRight: '20px' }}
@@ -73,7 +98,7 @@ class RegisterView extends Component {
             type="password"
             title="Please, more than seven values"
             required
-            onChange={this.handleChange}
+            onChange={handleChange}
             id="standard-basic"
             label="password"
           />
@@ -89,11 +114,6 @@ class RegisterView extends Component {
                 </form>
            </Container>
         );
-    }
+    
 }
 
-const mapDispatchToProps = {
-    onRegister: authOperations.register,
-};
-
-export default connect(null, mapDispatchToProps)(RegisterView);
