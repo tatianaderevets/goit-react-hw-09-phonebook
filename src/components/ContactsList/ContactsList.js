@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+// import PropTypes from 'prop-types';
 import avatar from '../../images/cute_cartoon.png'
 
 import {
@@ -19,7 +19,23 @@ import MyButton from '../Button';
 
 import { contactsOperation, contactsSelectors } from "../../redux/contacts";
 
-const ContactsList = ({ contacts, onDeleteContacts }) => {
+
+// const mapStateToProps = (state) => ({
+//     contacts: contactsSelectors.getVisibleContacts(state),
+
+// });
+
+// const mapDispatchToProps = dispatch =>( {
+// onDeleteContacts: (id) => dispatch(contactsOperation.deleteContact(id)),
+// })
+
+
+// export default connect(mapStateToProps, mapDispatchToProps )(ContactsList);
+
+export default function ContactsList() {
+    const contacts = useSelector(contactsSelectors.getVisibleContacts);
+     const dispatch = useDispatch();
+    const onDeleteContacts = (id) => dispatch(contactsOperation.deleteContact(id));
     const classes = useStyles();
 return (
     <>
@@ -56,21 +72,10 @@ return (
     );
 }
 
-ContactsList.propTypes = {
-    contacts: PropTypes.array.isRequired,
-    onDeleteContacts: PropTypes.func.isRequired
-}
+// ContactsList.propTypes = {
+//     contacts: PropTypes.array.isRequired,
+//     onDeleteContacts: PropTypes.func.isRequired
+// }
 
 
 
-const mapStateToProps = (state) => ({
-    contacts: contactsSelectors.getVisibleContacts(state),
-    
-});
-
-const mapDispatchToProps = dispatch =>( {
-onDeleteContacts: (id) => dispatch(contactsOperation.deleteContact(id)),
-})
- 
-
-export default connect(mapStateToProps, mapDispatchToProps )(ContactsList);
