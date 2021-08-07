@@ -9,11 +9,6 @@ import {
   Typography,
 } from '@material-ui/core';
 
-// const mapDispatchToProps = {
-//     onRegister: authOperations.register,
-// };
-
-// export default connect(null, mapDispatchToProps)(RegisterView);
 
 
 
@@ -23,11 +18,7 @@ export default function RegisterView() {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-    // state = {
-    //     name: '',
-    //     email: '',
-    //     password: '',
-    // };
+   
 
     const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -55,7 +46,7 @@ export default function RegisterView() {
     };
 
    
-        // const { name, email, password } = this.state;
+       
 
         return (
             <Container maxWidth="sm">

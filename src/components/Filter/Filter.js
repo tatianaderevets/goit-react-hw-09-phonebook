@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import s from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { contactsSelectors, changeFilter } from "../../redux/contacts";
@@ -7,16 +6,7 @@ import { contactsSelectors, changeFilter } from "../../redux/contacts";
 import { Container, Input, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-// const mapStateToProps = (state) => ({
-// value: contactsSelectors.getFilter(state),
-// })
 
-// const mapDispatchToProps = dispatch => ({
-//     onChange: (e) => dispatch(changeFilter(e.target.value)),
-// });
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -45,8 +35,4 @@ export default function Filter() {
 );
 }
 
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// }
 

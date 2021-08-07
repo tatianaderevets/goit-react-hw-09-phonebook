@@ -10,16 +10,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-// const styles = {
-//     form: {
-//         width: 320,
-//     },
-//     label: {
-//         display: 'flex',
-//         flexDirection: 'column',
-//         marginBottom: 15,
-//     },
-// };
+
 
 class LoginView extends Component {
     state = {
@@ -45,7 +36,7 @@ class LoginView extends Component {
         return (
             <Container maxWidth="sm">
                 <CssBaseline />
-                {/* <h1>Страница логина</h1> */}
+                
                  <Typography
           variant="h3"
           align="center"
@@ -92,7 +83,7 @@ class LoginView extends Component {
             style={{ display: 'flex', marginTop: '10px' }}
           />
 
-                    {/* <button type="submit">Войти</button> */}
+                   
                 </form>
                 <img alt="img" src={img} width="680px" style = {{  marginTop: '60px' }}></img>
             </Container>

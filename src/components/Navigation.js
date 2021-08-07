@@ -18,12 +18,6 @@ navigationItem: {
 }
 }
 
-// const mapStateToProps = state => ({
-//     isLoggedIn: authSelectors.getIsAuthenticated(state),
-// });
-
-// export default connect(mapStateToProps)(Navigation);
- 
 
 export default function Navigation() {
   const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);

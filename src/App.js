@@ -12,11 +12,6 @@ const LoginView = lazy(() => import('./views/LoginViev'));
 const ContactsView = lazy(() => import('./views/ContactsView'));
 
 
-// const mapDispatchToProps = {
-//   onGetCurretnUser: authOperations.getCurrentUser,
-// };
-
-// export default connect(null, mapDispatchToProps)(App);
 
 
 
@@ -59,7 +54,7 @@ export default function App() {
                 redirectTo="/login" >
                 <ContactsView />
               </PrivateRoute>
-              
+
             </Switch>
           </Suspense>
         </>

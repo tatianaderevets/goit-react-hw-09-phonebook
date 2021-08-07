@@ -8,11 +8,7 @@ import { authSelectors } from '../redux/auth';
  * - В противном случае рендерит Redirect на /login
  */
 
-// const mapStateToProps = state => ({
-//   isAuthenticated: authSelectors.getIsAuthenticated(state),
-// });
 
-// export default connect(mapStateToProps)(PrivateRoute);
 
 export default  function PrivateRoute ({
   isAuthenticated,

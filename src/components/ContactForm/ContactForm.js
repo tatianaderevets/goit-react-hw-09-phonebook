@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, {useState} from "react";
 import shortid from "shortid";
 import s from './ContactForm.module.css';
-import PropTypes from "prop-types";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { contactsOperation, contactsSelectors } from '../../redux/contacts';
 import MyButton from '../Button';
 
@@ -12,55 +11,57 @@ import CallIcon from '@material-ui/icons/Call';
 
 
 
+export default function Form() {
+
+  const nameInputId = shortid.generate();
+
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  
+const handleChange = (name) => (e) => {
+    switch (name) {
+      case "name":
+        return setName(e.target.value);
+
+      case "number":
+        return setNumber(e.target.value);
+
+      default:
+        return null;
+    }
+  };
+  
 
 
-class Form extends Component {
+  const contacts = useSelector(contactsSelectors.getAllContacts);
+  const dispatch = useDispatch();
 
-    static propTypes = {
-    onSubmit: PropTypes.func.isRequired
-  }
+  const onSubmit =  () =>
+    dispatch(contactsOperation.addContact({ name, number }));
 
-    state = {
-        name: '',
-        number: ''
-    };
 
-    nameInputId = shortid.generate();
-
-    handleChange = event => {
-    const { name, value } = event.currentTarget;
-    // console.log(event.currentTarget);
-    // console.log(event.currentTarget.name);
-    // console.log(event.currentTarget.value);
-    this.setState({[name]: value});
-    };
-
-    handleSubmit = event => {
-        const { contacts, onSubmit } = this.props;
-        const { name, number } = this.state;
+  const handleSubmit = event => {
         
-        event.preventDefault();
+        
+      event.preventDefault();
         // console.log(this.state);
         contacts.find((contact) => contact.name === name)
       ? alert(`This person ${name} is already in contacts`)
       : contacts.find((contact) => contact.number === number)
       ? alert(`This number ${number} is already in contacts`)
-      : onSubmit(this.state);
-        // this.props.onSubmit(this.state);
-        this.reset();
+        : onSubmit();
+    
+    setName("");
+    setNumber("");
 
     };
 
-    reset = () => {
-        this.setState({ name: '', number: '' });
-    }
-    
-    render() {
-      return (
+
+   return (
           <Container maxWidth="sm">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={handleSubmit}>
              <div className={s.phonebookInputFields}>
-        <label htmlFor={this.nameInputId} className="phonebook-label">
+        <label htmlFor={nameInputId} className="phonebook-label">
           
         
       <Input
@@ -71,10 +72,10 @@ class Form extends Component {
                   </InputAdornment>
                 }
         type="text"
-                  value={this.state.name}
-                  onChange={this.handleChange}
+                  value={name}
+                  onChange={handleChange("name")}
         name="name"
-                  id={this.nameInputId}
+                  id={nameInputId}
                   placeholder="Tatiana Derevets"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="The name can only consist of letters, apostrophes, dashes and spaces. For example: Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -93,8 +94,8 @@ class Form extends Component {
             type="tel"
             className={s.phonebookInput}
             name="number"
-            value={this.state.number}
-            onChange={this.handleChange}
+            value={number}
+            onChange={handleChange("number")}
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title='The phone number must be 11-12 digits long and can contain numbers, spaces, dashes, pot-bellied brackets and can start with +'
   placeholder="+380688888888"
@@ -106,18 +107,5 @@ class Form extends Component {
           </form>
           </Container>
         );
-    }
 }
-
-const mapStateToProps = (state) => ({
-  contacts: contactsSelectors.getAllContacts(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-    onSubmit: (name, number) =>{
-        return dispatch(contactsOperation.addContact(name, number))
-    },
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
 

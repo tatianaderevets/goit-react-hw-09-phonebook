@@ -17,11 +17,6 @@ const styles = {
 }
 }
 
-// const mapStateToProps = state => ({
-//     isAuthenticated: authSelectors.getIsAuthenticated(state),
-// });
-
-// export default connect(mapStateToProps)(MenuBar);
 
 export default function MenuBar() {
     const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
@@ -33,7 +28,7 @@ export default function MenuBar() {
         <AppBar position="relative">
         <Toolbar style={styles.Toolbar}>
         
-        {/* style={styles.header} */}
+       
         <Navigation />
             {isLoggedIn ? <UserMenu /> : <AuthNav />}
             </Toolbar>

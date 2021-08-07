@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
-// import PropTypes from 'prop-types';
 import avatar from '../../images/cute_cartoon.png'
 
 import {
@@ -19,18 +18,6 @@ import MyButton from '../Button';
 
 import { contactsOperation, contactsSelectors } from "../../redux/contacts";
 
-
-// const mapStateToProps = (state) => ({
-//     contacts: contactsSelectors.getVisibleContacts(state),
-
-// });
-
-// const mapDispatchToProps = dispatch =>( {
-// onDeleteContacts: (id) => dispatch(contactsOperation.deleteContact(id)),
-// })
-
-
-// export default connect(mapStateToProps, mapDispatchToProps )(ContactsList);
 
 export default function ContactsList() {
     const contacts = useSelector(contactsSelectors.getVisibleContacts);
@@ -71,11 +58,5 @@ return (
          </>
     );
 }
-
-// ContactsList.propTypes = {
-//     contacts: PropTypes.array.isRequired,
-//     onDeleteContacts: PropTypes.func.isRequired
-// }
-
 
 

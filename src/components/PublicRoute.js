@@ -26,16 +26,3 @@ export default function PublicRoute  ({
 
 
 
-// render={props =>
-//       isAuthenticated && routeProps.restricted ? (
-//         <Redirect to={redirectTo} />
-//       ) : (
-//         <Component {...props} />
-//       )
-//     }
-
-// const mapStateToProps = state => ({
-//   isAuthenticated: authSelectors.getIsAuthenticated(state),
-// });
-
-// export default connect(mapStateToProps)(PublicRoute);

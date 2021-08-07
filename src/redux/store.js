@@ -14,11 +14,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import { contactsReducer } from './contacts';
 import { authReducer } from './auth';
 
-// const contactsPersistConfig = {
-//     key: 'contacts',
-//     storage,
-//     blacklist: ["filter"],
-// };
+
 
 
 const middleware = [
@@ -29,7 +25,7 @@ const middleware = [
         },
 
     }),
-    // logger
+    
 ];
 
 const authPersistConfig = {

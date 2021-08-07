@@ -36,8 +36,7 @@ const AuthNav = () => (
                    
             to="/login"
             exact
-            // style={{ color: 'white' }}
-            // activeStyle={styles.activeLink}
+            
         >
            <LockIcon fontSize="large" style={{ color: 'white' }} />
                 </NavLink>
